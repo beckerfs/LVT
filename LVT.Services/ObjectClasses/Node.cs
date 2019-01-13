@@ -24,6 +24,6 @@ namespace LVT.Services.ObjectClasses
                 Type,
                 ContentLineOne
             };
-        }    
+        }
     }
 }

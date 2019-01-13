@@ -4,7 +4,8 @@ namespace LVT.Interfaces
 {
     public interface INodePresentable
     {
-        IEnumerable<string> ContentLines { get;  }
+        string Id { get; }
+        IEnumerable<string> ContentLinesToDisplay { get; }
         IEnumerable<INodePresentable> Subnodes { get; }
     }
 }
