@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ObjectClasses\Old\**" />
+    <EmbeddedResource Remove="ObjectClasses\Old\**" />
+    <None Remove="ObjectClasses\Old\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
 

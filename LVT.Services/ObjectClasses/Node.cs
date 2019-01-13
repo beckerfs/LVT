@@ -1,33 +1,29 @@
-﻿using LVT.Interfaces;
-using LVT.LVT.Interfaces;
+﻿using LVT.LVT.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace LVT.Services
+namespace LVT.Services.ObjectClasses
 {
-    public abstract class Node : INodePresentable
+    public abstract class Node : INode
     {
-        public Node()
+        public Node(string contentLineOne)
         {
             Id = Guid.NewGuid().ToString();
             Type = GetType().Name;
+            ContentLineOne = contentLineOne;
         }
-
-        public string Id { get; set; }
-
+        public string Id { get ; set ; }
         public string Type { get; set; }
+        public string ContentLineOne { get ; set ; }
 
-
-        public string ContentLineOne => "hello :-)";
-
-        public string ContentLineTwo => string.Empty;
-
-        public string ContentLineThree => string.Empty;
-
-        public string ContentLineFour => string.Empty;
-
-        public IList<INodePresentable> SubnodesOne => new List<INodePresentable>();
-
-        public IList<INodePresentable> SubnodesTwo => new List<INodePresentable>();
+        public IEnumerable<string> CollectContentLines()
+        {
+            return new List<string>
+            {
+                Id,
+                Type,
+                ContentLineOne
+            };
+        }    
     }
 }

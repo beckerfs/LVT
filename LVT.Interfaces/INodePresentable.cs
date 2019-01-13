@@ -1,20 +1,10 @@
-﻿using LVT.LVT.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LVT.Interfaces
 {
     public interface INodePresentable
     {
-        string Id { get; }
-        string Type { get; }
-        string ContentLineOne { get; }
-        string ContentLineTwo { get; }
-        string ContentLineThree { get; }
-        string ContentLineFour { get; }
-
-        IList<INodePresentable> SubnodesOne { get; }
-        IList<INodePresentable> SubnodesTwo { get; }
+        IEnumerable<string> ContentLines { get;  }
+        IEnumerable<INodePresentable> Subnodes { get; }
     }
 }
