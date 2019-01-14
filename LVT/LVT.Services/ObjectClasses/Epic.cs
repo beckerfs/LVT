@@ -13,15 +13,14 @@ namespace LVT.Services.ObjectClasses
 
         public string ContentLineTwo { get; private set; }
 
-        new public IEnumerable<string> CollectProperties()
+        public IEnumerable<string> CollectProperties()
         {
             return new List<string>
             {
-                Id,
                 Type,
                 ContentLineOne,
                 ContentLineTwo
-            };
+            };           
         }
     }
 }

@@ -16,16 +16,13 @@ namespace LVT.Services.ObjectClasses
         public string Type { get; set; }
         public string ContentLineOne { get ; set ; }
 
-        //look into dictionary - this way key / value would be preserved
         public IEnumerable<string> CollectProperties()
         {
             return new List<string>
             {
-                Id,
                 Type,
                 ContentLineOne
             };
         }
-
     }
 }

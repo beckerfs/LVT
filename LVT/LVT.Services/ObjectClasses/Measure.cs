@@ -21,13 +21,12 @@ namespace LVT.Services.ObjectClasses
         {
             return new List<string>
             {
-                Id,
                 Type,
                 ContentLineOne,
                 ContentLineTwo,
                 ContentLineThree,
                 ContentLineFour
-            };
+            };           
         }
     }
 }

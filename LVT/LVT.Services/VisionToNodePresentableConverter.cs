@@ -6,74 +6,69 @@ using System.Linq;
 namespace LVT.Services
 {
     class VisionToNodePresentableConverter : IVisionToINodePresentableConverter
-    {       
-        public INodePresentable ConvertToNodePresentable(Vision vision)
+    {
+        public INodePresentable ConvertToINodePresentable(Vision vision)
         {
-            //this better or preferably more explicit as with goals etc?  
+            //this better or preferably more explicit as with epic/measure?  
             var contentLinesToDisplay = vision.CollectProperties();
+            var subnodes = vision.Goals.Select(goal => ConvertToINodePresentable(goal));
 
-            var subnodes = vision.Goals.Select(goal => ConvertToNodePresentable(goal));
             return new NodePresentable(vision.Id, contentLinesToDisplay, subnodes);
         }
 
         
-        public INodePresentable ConvertToNodePresentable(Goal goal)
+        public INodePresentable ConvertToINodePresentable(Goal goal)
         {
-            var contentLinesToDisplay = new List<string>
-            {
-                goal.Type,
-                goal.ContentLineOne
-            };
-            var subnodes = goal.Bets.Select(bet => ConvertToNodePresentable(bet));
+            var contentLinesToDisplay = goal.CollectProperties();
+            var subnodes = goal.Bets.Select(bet => ConvertToINodePresentable(bet));
+
             return new NodePresentable(goal.Id, contentLinesToDisplay, subnodes);
         }
 
-        private INodePresentable ConvertToNodePresentable(Bet bet)
+      
+        private INodePresentable ConvertToINodePresentable(Bet bet)
         {
-            var contentLinesToDisplay = new List<string>
-            {
-                bet.Type,
-                bet.ContentLineOne
-            };
-            var subnodes = bet.Initiatives.Select(initiative => ConvertToNodePresentable(initiative));
+            var contentLinesToDisplay = bet.CollectProperties();
+            var subnodes = bet.Initiatives.Select(initiative => ConvertToINodePresentable(initiative));
+
             return new NodePresentable(bet.Id, contentLinesToDisplay, subnodes);
         }
 
-        private INodePresentable ConvertToNodePresentable(Initiative initiative)
+        private INodePresentable ConvertToINodePresentable(Initiative initiative)
         {
-            var contentLinesToDisplay = new List<string>
-            {
-                initiative.Type,
-                initiative.ContentLineOne
-            };
-            var subnodes = initiative.Measures.Select(measure => ConvertToNodePresentable(measure)).Concat(initiative.Epics.Select(epic => ConvertToNodePresentable(epic)));
+            var contentLinesToDisplay = initiative.CollectProperties();
+            var subnodes = initiative.Measures.Select(measure => ConvertToNodePresentable(measure)).Concat(initiative.Epics.Select(epic => ConvertToINodePresentable(epic)));
         
             return new NodePresentable(initiative.Id, contentLinesToDisplay, subnodes);
         }
               
         private INodePresentable ConvertToNodePresentable(Measure measure)
         {
-            var contentLinesToDisplay = new List<string>
-            {
-                measure.Type,
-                measure.ContentLineOne,
-                measure.ContentLineTwo,
-                measure.ContentLineThree,
-                measure.ContentLineFour
-            };
+            //var contentLinesToDisplay = new List<string>
+            //{
+            //    measure.Type,
+            //    measure.ContentLineOne,
+            //    measure.ContentLineTwo,
+            //    measure.ContentLineThree,
+            //    measure.ContentLineFour
+            //};
+            var contentLinesToDisplay = measure.CollectProperties();
             var subnodes = new List<INodePresentable>();
+
             return new NodePresentable(measure.Id, contentLinesToDisplay, subnodes);
         }
 
-        private INodePresentable ConvertToNodePresentable(Epic epic)
+        private INodePresentable ConvertToINodePresentable(Epic epic)
         {
-            var contentLinesToDisplay = new List<string>
-            {
-                epic.Type,
-                epic.ContentLineOne,
-                epic.ContentLineTwo
-            };
+            //var contentLinesToDisplay = new List<string>
+            //{
+            //    epic.Type,
+            //    epic.ContentLineOne,
+            //    epic.ContentLineTwo
+            //};
+            var contentLinesToDisplay = epic.CollectProperties();
             var subnodes = new List<INodePresentable>();
+
             return new NodePresentable(epic.Id, contentLinesToDisplay, subnodes);
         }
     }

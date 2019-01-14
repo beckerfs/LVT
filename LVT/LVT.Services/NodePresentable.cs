@@ -13,8 +13,8 @@ namespace LVT.Services
             Subnodes = subnodes;
         }
 
-        public IEnumerable<string> ContentLinesToDisplay { get; private set;  }
         public string Id { get; }
+        public IEnumerable<string> ContentLinesToDisplay { get; private set;  }
         public IEnumerable<INodePresentable> Subnodes { get; }
     }
 }

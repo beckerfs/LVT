@@ -4,6 +4,6 @@ namespace LVT.Interfaces
 {
     public interface IVisionToINodePresentableConverter
     {
-        INodePresentable ConvertToNodePresentable(Vision vision);
+        INodePresentable ConvertToINodePresentable(Vision vision);
     }
 }

@@ -1,28 +1,35 @@
 ﻿using LVT.Interfaces;
-using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LVT.LVT.Services
 {
     class GoogleOrgChartFromINodePresentable
-    {
-        //WIP, to use with INodePresentable instead of object classes:
-        //public string BuildOrgChartStringFromINodePresentable(INodePresentable presentable, string parentId)
-        //{
-        //    //pseudo code, need to think about the the strings and variables - save strings in resources?  
-        //    var nodeString = new StringBuilder("v: ")
-        //        .Append(presentable.Id)
-        //        .Append(", f: ")
-        //        .Append(presentable.ContentLinesToDisplay.ToList()[0])
-        //        .Append(string.Join(" ", presentable.ContentLinesToDisplay.ToList().Skip(1)
-        //            .Select(content => "div: " + content + "/div")))
-        //        .Append(", pid:")
-        //        .Append(parentId)
-        //        .Append(" end");
-        //    var subnodeString = string.Join(" ", presentable.Subnodes.Select(node => BuildOrgChartStringFromINodePresentable(node, presentable.Id)));
+    {        
+        public string BuildOrgChartStringFromINodePresentable(INodePresentable presentable, string parentNodeId)
+        {
+            var nodeProperties = presentable.ContentLinesToDisplay.ToList();
+            var nodeId = presentable.Id;
+            var nodeHeader = nodeProperties[0];
+            var contentLines = nodeProperties.Skip(1);
+            var subnodes = presentable.Subnodes;
 
-        //    return nodeString.Append(subnodeString).ToString();
-        //}
+            //ContentLinesToDisplay.ToList()[0] - ContentLinesToDisplay.ToList().Skip(1)
+            //pseudo code, need to think about the the strings and variables - save strings in resources?  
+            var nodeString = new StringBuilder($"[{{ v:'")
+                .Append(nodeId)
+                .Append($"', f:'")
+                .Append(nodeHeader) 
+                .Append(string.Join("", contentLines.Select(line => $"<div style=\"font-style:italic\">{line}</div>")))
+                .Append($"'}}, '")
+                .Append(parentNodeId)
+                .Append($"']");
+
+            //var subnodeString = string.Join(",", subnodes.Select(node => BuildOrgChartStringFromINodePresentable(node, presentable.Id)));
+
+            var subnodeString = new StringBuilder(string.Join(", ", subnodes.Select(node => BuildOrgChartStringFromINodePresentable(node, nodeId))));
+
+            return nodeString.Append(subnodeString).ToString();
+        }
     }
 }
