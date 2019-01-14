@@ -8,6 +8,7 @@ namespace LVT.Services.ObjectClasses
         public Goal(string title) : base(title)
         {
             ContentLineOne = title;
+            Bets = new List<Bet>();
         }
 
         public List<Bet> Bets { get; set; }

@@ -8,6 +8,7 @@ namespace LVT.Services.ObjectClasses
         public Bet(string title) : base(title)
         {
             ContentLineOne = title;
+            Initiatives = new List<Initiative>();
         }
 
         public List<Initiative> Initiatives { get; set; }

@@ -17,7 +17,7 @@ namespace LVT.Services.ObjectClasses
         public string ContentLineThree { get; private set; }
         public string ContentLineFour { get; private set; }
 
-        public new IEnumerable<string> CollectContentLines()
+        new public IEnumerable<string> CollectProperties()
         {
             return new List<string>
             {

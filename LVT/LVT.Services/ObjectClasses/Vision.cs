@@ -1,5 +1,4 @@
-﻿using LVT.Interfaces;
-using LVT.LVT.Interfaces;
+﻿using LVT.LVT.Interfaces;
 using System.Collections.Generic;
 
 namespace LVT.Services.ObjectClasses
@@ -9,6 +8,7 @@ namespace LVT.Services.ObjectClasses
         public Vision(string title) : base(title)
         {
             ContentLineOne = title;
+            Goals = new List<Goal>();
         }
 
         public List<Goal> Goals { get; set; }

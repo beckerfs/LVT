@@ -16,7 +16,8 @@ namespace LVT.Services.ObjectClasses
         public string Type { get; set; }
         public string ContentLineOne { get ; set ; }
 
-        public IEnumerable<string> CollectContentLines()
+        //look into dictionary - this way key / value would be preserved
+        public IEnumerable<string> CollectProperties()
         {
             return new List<string>
             {
@@ -25,5 +26,6 @@ namespace LVT.Services.ObjectClasses
                 ContentLineOne
             };
         }
+
     }
 }

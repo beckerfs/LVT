@@ -1,25 +1,22 @@
 ﻿using LVT.Interfaces;
-using LVT.LVT.Interfaces;
 using LVT.Services.ObjectClasses;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace LVT.Services
 {
-    class NodeToNodePresentableConverter
+    class VisionToNodePresentableConverter : IVisionToINodePresentableConverter
     {       
-        public INodePresentable ConvertToNodePresentable(INode node)
+        public INodePresentable ConvertToNodePresentable(Vision vision)
         {
-            
-            var contentLinesToDisplay = new List<string>
-            {
-                vision.Type,
-                vision.ContentLineOne
-            };
+            //this better or preferably more explicit as with goals etc?  
+            var contentLinesToDisplay = vision.CollectProperties();
+
             var subnodes = vision.Goals.Select(goal => ConvertToNodePresentable(goal));
             return new NodePresentable(vision.Id, contentLinesToDisplay, subnodes);
         }
 
+        
         public INodePresentable ConvertToNodePresentable(Goal goal)
         {
             var contentLinesToDisplay = new List<string>
